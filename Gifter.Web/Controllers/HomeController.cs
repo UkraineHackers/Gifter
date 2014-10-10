@@ -28,5 +28,21 @@ namespace Gifter.Web.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ActionResult AddContent()
+        {
+            ViewBag.Message = "Add Content";
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddContent(String tags, String presents)
+        {
+            ViewBag.Message = "Add Content";
+            String res = tags + "&" + presents;
+            return Json(new {res});
+        }
     }
 }
