@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gifter.Web", "Gifter.Web\Gifter.Web.csproj", "{7A38F6C2-6DAC-49B5-9C0C-EB046E6CF96E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gifter.DataAccess", "Gifter.DataAccess\Gifter.DataAccess.csproj", "{760FC2C8-173E-425F-B9E4-32449B6F7A60}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A38F6C2-6DAC-49B5-9C0C-EB046E6CF96E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A38F6C2-6DAC-49B5-9C0C-EB046E6CF96E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A38F6C2-6DAC-49B5-9C0C-EB046E6CF96E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A38F6C2-6DAC-49B5-9C0C-EB046E6CF96E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{760FC2C8-173E-425F-B9E4-32449B6F7A60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{760FC2C8-173E-425F-B9E4-32449B6F7A60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{760FC2C8-173E-425F-B9E4-32449B6F7A60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{760FC2C8-173E-425F-B9E4-32449B6F7A60}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
