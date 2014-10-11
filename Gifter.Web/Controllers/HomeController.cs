@@ -15,10 +15,7 @@ namespace Gifter.Web.Controllers
 
         public ActionResult Index()
         {
-            var users = (from usr in db.Users
-                         select usr).ToList();
-
-            return View(users);
+            return View();
         }
 
         [HttpGet]
