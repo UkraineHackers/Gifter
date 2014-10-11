@@ -37,11 +37,13 @@
 
     $(document).ready(function () {
         $('#submit').click(function (e) {
+            $(this).attr('disabled', 'disabled');
             e.preventDefault();
             var $form = $(this).closest('form');
             $.post($form.attr('action'), $form.serialize(), function (data) {
                 $("#tags").tagsinput('removeAll');
                 $("#gifts").tagsinput('removeAll');
+                $("#submit").removeAttr('disabled');
                 $("#name").val('');
                 console.log(data);
                 swal("Thank you!", "You helped our service to become more precise!", "success");
