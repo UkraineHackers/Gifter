@@ -21,25 +21,9 @@ namespace Gifter.Web.Controllers
             return View(users);
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your app description page.";
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        
-
         [HttpGet]
         public ActionResult UserRequest()
         {
-            ViewBag.Message = "Add Content";
             ViewBag.Tags = ProcessStringData.getTags();
 
             return View();
@@ -48,7 +32,7 @@ namespace Gifter.Web.Controllers
         [HttpPost]
         public ActionResult UserRequest(String tags)
         {
-            
+
             var res = ProcessStringData.getAnswer(tags);
             List<GiftItem> resx = new List<GiftItem>();
             foreach (var x in res)
@@ -67,10 +51,19 @@ namespace Gifter.Web.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult AddContent(String tags, String presents)
+        [HttpGet]
+        public ActionResult GetRegisteredUsers()
         {
-            ProcessStringData.createFakeUser(tags, presents);
+            var users = (from usr in db.Users
+                         select usr).ToList();
+
+            return View(users);
+        }
+
+        [HttpPost]
+        public ActionResult AddContent(String tags, String presents, String name)
+        {
+            ProcessStringData.createUser(name, tags, presents);
             List<int> tid = ProcessStringData.getTagsFromString(tags);
             List<int> pid = ProcessStringData.getPresentsFromString(presents);
 

@@ -124,8 +124,13 @@ namespace Gifter.Web.HelperClasses
                 }
             }
             giftsMap = giftsMap.OrderBy(x => -x.Value).ToDictionary(x => x.Key, x => x.Value);
-            
-            return giftsMap;
+            double maxVal = giftsMap.Select(x => x.Value).Max();
+            var result = new Dictionary<String, double>();
+            foreach (var x in giftsMap)
+            {
+                result.Add(x.Key, x.Value / maxVal);
+            }
+            return result;
         }
 
         public static Dictionary<String, double> getAnswer(String tags)

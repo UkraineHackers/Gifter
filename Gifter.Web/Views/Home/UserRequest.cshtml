@@ -1,35 +1,38 @@
 ﻿@{
-    ViewBag.Title = "UserRequest";
+    ViewBag.Title = "Find The Gift";
 }
 
 
 
-<h2>UserRequest</h2>
-<form action="~/Home/UserRequest" method="post">
-    <input type="hidden" value="@ViewBag.Tags" id="availableTags" />
-    <input name="tags" id="tags" data-role="tagsinput" data-provide="typeahead"/>
-    <br />
-    <button type="submit" id="submit" class="btn btn-primary">Submit</button>
-</form>
-
+<div class="panel panel-primary">
+    <div class="panel-heading">Describe the person for which you are looking for present</div>
+    <div class="panel-body">
+        <form action="~/Home/UserRequest" method="post">
+            <input type="hidden" value="@ViewBag.Tags" id="availableTags" />
+            <label for="tags">Tags</label>
+            <input name="tags" id="tags" data-role="tagsinput" data-provide="typeahead" />
+            <br />
+            <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
 
 <br />
 
 <div class="progress progressTemplate hidden">
-  <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" style="width: 95%">
-  </div>
+    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" style="width: 95%">
+    </div>
 </div>
 <div id="results">
-
 </div>
 
 <script src="~/Scripts/userRequest.js"></script>
 
 
-<script> 
-$('#tags').tagsinput({
-    typeahead: {
-        source: $("#availableTags").val().split(',')
-    }
-});
+<script>
+    $('#tags').tagsinput({
+        typeahead: {
+            source: $("#availableTags").val().split(',')
+        }
+    });
 </script>

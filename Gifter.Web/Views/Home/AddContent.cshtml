@@ -2,25 +2,50 @@
     ViewBag.Title = "AddContent";
 }
 
-<h2>AddContent</h2>
-<form  method="post" action="~/Home/AddContent">
-    <input type="hidden" value="@ViewBag.Tags" id="availableTags" />
-    <input type="hidden" value="@ViewBag.Gifts" id="availableGifts" />
-    <input name="tags" id="tags" type="text" data-role="tagsinput" data-provide="typeahead"/>
-    <input name="presents" id="gifts" type="text" data-role="tagsinput" data-provide="typeahead"/>
-    <button type="submit">Submit</button>
-</form>
+<div class="panel panel-primary">
+    <div class="panel-heading">Simple form. It's not a rocket science <b>:D</b></div>
+    <div class="panel-body">
+        <form method="post" action="~/Home/AddContent">
+            <input type="hidden" value="@ViewBag.Tags" id="availableTags" />
+            <input type="hidden" value="@ViewBag.Gifts" id="availableGifts" />
+            <label for="name">Please, provide your name so I know who is my angel :)</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="Enter Your Full Name"/>
+            <br />
+            <label for="tags">Describe yourself in a few words <i>(and remove what is wrong)</i></label>
+            <input name="tags" id="tags" type="text" data-role="tagsinput" data-provide="typeahead" autocomplete="off" value="smart,lazy,talkative,problem solver,manager,boss,lucky,football player,skater"/>
+            <br />
+            <label for="gifts">Just type the gifts you would like to receive <i>(and remove what is wrong)</i></label>
+            <input name="presents" id="gifts" type="text" data-role="tagsinput" data-provide="typeahead" autocomplete="off" value="gamepad,laptop,ipod,iphone,moto g,poker set,radio helicopter"/>
+            <br />
+            <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
 
 <script>
-$('#tags').tagsinput({
-    typeahead: {
-        source: $("#availableTags").val().split(',')
-    }
-});
-        
-$('#gifts').tagsinput({
-    typeahead: {
-        source: $("#availableGifts").val().split(',')
-    }
-});
+    $('#tags').tagsinput({
+        typeahead: {
+            source: $("#availableTags").val().split(',')
+        }
+    });
+
+    $('#gifts').tagsinput({
+        typeahead: {
+            source: $("#availableGifts").val().split(',')
+        }
+    });
+
+    $(document).ready(function () {
+        $('#submit').click(function (e) {
+            e.preventDefault();
+            var $form = $(this).closest('form');
+            $.post($form.attr('action'), $form.serialize(), function (data) {
+                $("#tags").tagsinput('removeAll');
+                $("#gifts").tagsinput('removeAll');
+                $("#name").val('');
+                console.log(data);
+                swal("Thank you!", "You helped our service to become more precise!", "success");
+            });
+        });
+    });
 </script>

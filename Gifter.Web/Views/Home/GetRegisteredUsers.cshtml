@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Gifter.DataAccess.Users>
+
+@{
+    ViewBag.Title = "Registered Users";
+}
+<h3>Registered users</h3>
+
+<div class="list-group">
+    @foreach (var user in Model)
+    { 
+        <a href="#" class="list-group-item">@user.UserName</a>   
+    }
+</div>
