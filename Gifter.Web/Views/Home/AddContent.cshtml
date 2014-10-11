@@ -4,7 +4,23 @@
 
 <h2>AddContent</h2>
 <form  method="post" action="~/Home/AddContent">
-    <input name="tags" type="text"/>
-    <input name="presents" type="text"/>
+    <input type="hidden" value="@ViewBag.Tags" id="availableTags" />
+    <input type="hidden" value="@ViewBag.Gifts" id="availableGifts" />
+    <input name="tags" id="tags" type="text" data-role="tagsinput" data-provide="typeahead"/>
+    <input name="presents" id="gifts" type="text" data-role="tagsinput" data-provide="typeahead"/>
     <button type="submit">Submit</button>
 </form>
+
+<script>
+$('#tags').tagsinput({
+    typeahead: {
+        source: $("#availableTags").val().split(',')
+    }
+});
+        
+$('#gifts').tagsinput({
+    typeahead: {
+        source: $("#availableGifts").val().split(',')
+    }
+});
+</script>

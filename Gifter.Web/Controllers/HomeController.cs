@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
-using Gifter.DataAccess;
+using Gifter.Web.HelperClasses;
 
 namespace Gifter.Web.Controllers
 {
@@ -16,7 +16,7 @@ namespace Gifter.Web.Controllers
         public ActionResult Index()
         {
             var users = (from usr in db.Users
-                        select usr).ToList();
+                         select usr).ToList();
 
             return View(users);
         }
@@ -34,21 +34,47 @@ namespace Gifter.Web.Controllers
             return View();
         }
 
+        
+
+        [HttpGet]
+        public ActionResult UserRequest()
+        {
+            ViewBag.Message = "Add Content";
+            ViewBag.Tags = ProcessStringData.getTags();
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UserRequest(String tags)
+        {
+            
+            var res = ProcessStringData.getAnswer(tags);
+            List<String> resx = new List<String>();
+            foreach (var x in res)
+            {
+                resx.Add("[" + x.Key + "," + x.Value + "]");
+            }
+            return Json(new { resx });
+        }
+
+
         [HttpGet]
         public ActionResult AddContent()
         {
-
-            ViewBag.Message = "Add Content";
-
+            ViewBag.Tags = ProcessStringData.getTags();
+            ViewBag.Gifts = ProcessStringData.getGifts();
             return View();
         }
 
         [HttpPost]
         public ActionResult AddContent(String tags, String presents)
         {
-            ViewBag.Message = "Add Content";
-            String res = tags + "&" + presents;
-            return Json(new {res});
+            ProcessStringData.createFakeUser(tags, presents);
+            List<int> tid = ProcessStringData.getTagsFromString(tags);
+            List<int> pid = ProcessStringData.getPresentsFromString(presents);
+
+            return Json(new { tid, pid });
         }
     }
 }

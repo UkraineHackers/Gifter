@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "UserRequest";
+}
+
+
+
+<h2>UserRequest</h2>
+<form action="~/Home/UserRequest" method="post">
+    <input type="hidden" value="@ViewBag.Tags" id="availableTags" />
+    <input name="tags" id="tags" data-role="tagsinput" data-provide="typeahead"/>
+    <br />
+    <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+</form>
+<script src="~/Scripts/userRequest.js"></script>
+
+<script> 
+$('#tags').tagsinput({
+    typeahead: {
+        source: $("#availableTags").val().split(',')
+    }
+});
+</script>
