@@ -88,9 +88,9 @@ namespace Gifter.Web.HelperClasses
             createUser("unknown", tags, gifts);
         }
 
-        public static Dictionary<int, double> getAnswer(List<int> tags)
+        public static Dictionary<String, double> getAnswer(List<int> tags)
         {
-            Dictionary<int, double> giftsMap = new Dictionary<int, double>(); // mapping gifts to percentages
+            Dictionary<String, double> giftsMap = new Dictionary<String, double>(); // mapping gifts to percentages
             using (var context = new GifterDBEntities())
             {
                 List<Users> users = context.Users.ToList();
@@ -112,22 +112,23 @@ namespace Gifter.Web.HelperClasses
                     foreach (Gifts gift in user.Gifts)
                     {
                         double value;
-                        if (giftsMap.TryGetValue(gift.GiftId, out value))
+                        if (giftsMap.TryGetValue(gift.GiftName, out value))
                         {
-                            giftsMap[gift.GiftId] = value + sim;
+                            giftsMap[gift.GiftName] = value + sim;
                         }
                         else
                         {
-                            giftsMap.Add(gift.GiftId, sim);
+                            giftsMap.Add(gift.GiftName, sim);
                         }
                     }
                 }
             }
             giftsMap = giftsMap.OrderBy(x => -x.Value).ToDictionary(x => x.Key, x => x.Value);
+            
             return giftsMap;
         }
 
-        public static Dictionary<int, double> getAnswer(String tags)
+        public static Dictionary<String, double> getAnswer(String tags)
         {
             return getAnswer(getTagsFromString(tags));
         }

@@ -50,10 +50,10 @@ namespace Gifter.Web.Controllers
         {
             
             var res = ProcessStringData.getAnswer(tags);
-            List<String> resx = new List<String>();
+            List<GiftItem> resx = new List<GiftItem>();
             foreach (var x in res)
             {
-                resx.Add("[" + x.Key + "," + x.Value + "]");
+                resx.Add(new GiftItem(x.Key, (int)(x.Value * 100.0)));
             }
             return Json(new { resx });
         }
@@ -75,6 +75,18 @@ namespace Gifter.Web.Controllers
             List<int> pid = ProcessStringData.getPresentsFromString(presents);
 
             return Json(new { tid, pid });
+        }
+    }
+
+    class GiftItem
+    {
+        public String name;
+        public int percentage;
+
+        public GiftItem(String n, int p)
+        {
+            name = n;
+            percentage = p;
         }
     }
 }
