@@ -3,12 +3,14 @@
 @{
     ViewBag.Title = "Home Page";
 }
+
+
 <h3>Home page content</h3>
 
 <ul>
     @foreach (var user in Model)
     { 
      <li>@user.UserName</li>   
-    }
-    
+    }    
 </ul>
+
