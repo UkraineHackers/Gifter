@@ -55,7 +55,7 @@ namespace Gifter.Web.Controllers
             {
                 resx.Add(new GiftItem(x.Key, (int)(x.Value * 100.0)));
             }
-            return Json(new { result = resx });
+            return Json(new { resx });
         }
 
 
