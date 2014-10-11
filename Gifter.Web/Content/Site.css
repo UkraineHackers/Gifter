@@ -12,6 +12,11 @@
     display: block !important;
 }
 
-.panel {
-    margin-top: 15px;    
+.homepage{
+    margin-top: 15px;
+    opacity: 0.8;    
+}
+
+div.panel:hover {
+    opacity: 1.0;
 }
