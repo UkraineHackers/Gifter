@@ -1,4 +1,5 @@
 ﻿body {
+    background-image: url("/Images/happiness.jpg");    
     padding-top: 50px;
 }
 
@@ -12,5 +13,5 @@
 }
 
 .panel {
-    margin-top: 15px;
+    margin-top: 15px;    
 }
