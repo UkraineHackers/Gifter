@@ -25,5 +25,9 @@ namespace Gifter.DataAccess
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Gifts> Gifts { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public DbSet<Tags> Tags { get; set; }
+        public DbSet<Users> Users { get; set; }
     }
 }

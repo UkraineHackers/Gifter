@@ -4,7 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="243f35344d0d4421b6e3d98acf220690" Name="Diagram1" />
+      <Diagram DiagramId="27b014306e0743cbb9ea8e85edbc2385" Name="Diagram1">
+        <EntityTypeShape EntityType="GifterDBModel.Gifts" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="GifterDBModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GifterDBModel.Tags" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="GifterDBModel.Users" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="GifterDBModel.Users_Gifts" ManuallyRouted="false" />
+        <AssociationConnector Association="GifterDBModel.Users_Tags" ManuallyRouted="false" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

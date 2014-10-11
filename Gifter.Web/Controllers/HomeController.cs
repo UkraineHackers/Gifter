@@ -3,22 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
+using Gifter.DataAccess;
 
 namespace Gifter.Web.Controllers
 {
     public class HomeController : Controller
     {
+        GifterDBEntities db = new GifterDBEntities();
+
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            var users = (from usr in db.Users
+                        select usr).ToList();
 
-            return View();
+            return View(users);
         }
 
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
-
             return View();
         }
 
