@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gifter.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -36,6 +37,7 @@ namespace Gifter.Web.Controllers
         [HttpGet]
         public ActionResult AddContent()
         {
+
             ViewBag.Message = "Add Content";
 
             return View();
