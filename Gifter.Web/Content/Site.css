@@ -12,11 +12,22 @@
     display: block !important;
 }
 
-.homepage{
-    margin-top: 15px;
-    opacity: 0.8;    
+.panel {
+    margin-top: 15px;    
 }
 
-div.panel:hover {
+.homepage {
+    opacity: 0.8;
+}
+
+.homepage:hover {
     opacity: 1.0;
 }
+
+.wrapper {
+    margin-top: 15px;
+    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.6);   
+    text-align:center;
+}
+
