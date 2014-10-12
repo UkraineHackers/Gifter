@@ -86,6 +86,12 @@ namespace Gifter.Web.Controllers
             ViewBag.Gifts = ProcessStringData.getGifts();
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Admin4()
+        {
+            return View();
+        }
     }
 
     class GiftItem
