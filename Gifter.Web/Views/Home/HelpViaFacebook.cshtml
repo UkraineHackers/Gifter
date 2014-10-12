@@ -1,0 +1,173 @@
+﻿@{
+    ViewBag.Title = "HelpViaFacebook";
+}
+
+<script>
+    // This is called with the results from from FB.getLoginStatus().
+    function statusChangeCallback(response) {
+        console.log('statusChangeCallback');
+        console.log(response);
+        // The response object is returned with a status field that lets the
+        // app know the current login status of the person.
+        // Full docs on the response object can be found in the documentation
+        // for FB.getLoginStatus().
+        if (response.status === 'connected') {
+            // Logged into your app and Facebook.
+            testAPI();
+        } else if (response.status === 'not_authorized') {
+            // The person is logged into Facebook, but not your app.
+            document.getElementById('status').innerHTML = 'Please log ' +
+              'into this app.';
+        } else {
+            // The person is not logged into Facebook, so we're not sure if
+            // they are logged into this app or not.
+            document.getElementById('status').innerHTML = 'Please log ' +
+              'into Facebook.';
+        }
+    }
+
+    // This function is called when someone finishes with the Login
+    // Button.  See the onlogin handler attached to it in the sample
+    // code below.
+    function checkLoginState() {
+        FB.getLoginStatus(function (response) {
+            statusChangeCallback(response);
+        });
+    }
+
+    window.fbAsyncInit = function () {
+        FB.init({
+            appId: '793384617357479',
+
+            xfbml: true,  // parse social plugins on this page
+            version: 'v1.0' // use version 1.0
+        });
+
+        FB.getLoginStatus(function (response) {
+            statusChangeCallback(response);
+        });
+
+    };
+
+    // Load the SDK asynchronously
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    // Here we run a very simple test of the Graph API after login is
+    // successful.  See statusChangeCallback() for when this call is made.
+    function testAPI() {
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function (response) {
+            console.log('Successful login for: ' + response.name);
+            getFriends();
+            document.getElementById('status').innerHTML =
+              'Thanks for logging in, ' + response.name + '!';
+        });
+    }
+</script>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Login with Facebook</div>
+    <div class="panel-body">
+        <fb:login-button scope="public_profile,email,user_friends,friends_likes" onlogin="checkLoginState();">
+</fb:login-button>
+
+        <div id="status">
+        </div>
+
+        <br />
+        <input type="text" id="pickFriend" />
+        <button class="btn btn-primary" id="getGift" disabled="disabled">Get Gifts!</button>
+
+        <br />
+
+        <form method="post" action="~/Home/AddContent">
+            <input type="hidden" value="@ViewBag.Gifts" id="availableGifts" />
+            <label for="name">Please, provide your name so I know who is my angel :)</label>
+            <input type="text" name="name" id="name" class="form-control" />
+            <br />
+            <label for="tags">Describe yourself in a few words <i>(and remove what is wrong)</i></label>
+            <input name="tags" id="tags" type="text" data-role="tagsinput" />
+            <br />
+            <label for="gifts">Just type the gifts you would like to receive <i>(and remove what is wrong)</i></label>
+            <input name="presents" id="gifts" type="text" data-role="tagsinput" data-provide="typeahead" autocomplete="off" value="gamepad,laptop,ipod,iphone,moto g,poker set,radio helicopter" />
+            <br />
+            <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    var friends;
+
+    function getFriends() {
+        FB.api('me/friends', function (response) {
+            var ar = [];
+            for (var i = 0; i < response.data.length; i++) {
+                ar[ar.length] = response.data[i].name;
+            }
+            friends = response.data;
+            $('#getGift').removeAttr('disabled');
+            $("#pickFriend").autocomplete({
+                source: ar
+            });
+        });
+    }
+
+    $('#getGift').click(function () {
+        var name = $('#pickFriend').val();
+        var id = -1;
+        for (var i = 0; i < friends.length; i++) {
+            if (friends[i].name == name) {
+                id = friends[i].id;
+            }
+        }
+        if (id == -1) {
+            sweetAlert("Oops...", "Something went wrong!", "error");
+            return;
+        }
+        FB.api(id + '/likes?limit=1000', function (response) {
+            arr = response.data;
+            var res = "";
+            for (var i = 0; i < arr.length; i++) {
+                if (res.length > 0)
+                    res += ",";
+                res += arr[i].category + "," + id;
+
+                $('#tags').tagsinput('add', arr[i].category);
+                $('#tags').tagsinput('add', arr[i].id);
+            }
+            console.log(res);
+        });
+    });
+</script>
+
+<script>
+    $('#gifts').tagsinput({
+        typeahead: {
+            source: $("#availableGifts").val().split(',')
+        }
+    });
+
+    $(document).ready(function () {
+        $('#submit').click(function (e) {
+            $(this).attr('disabled', 'disabled');
+            e.preventDefault();
+            var $form = $(this).closest('form');
+            $.post($form.attr('action'), $form.serialize(), function (data) {
+                $("#tags").tagsinput('removeAll');
+                $("#gifts").tagsinput('removeAll');
+                $("#submit").removeAttr('disabled');
+                $("#name").val('');
+                console.log(data);
+                swal("Thank you!", "You helped our service to become more precise!", "success");
+            });
+        });
+    });
+</script>

@@ -123,6 +123,10 @@ namespace Gifter.Web.HelperClasses
                     }
                 }
             }
+            if (giftsMap.Count == 0)
+            {
+                giftsMap.Add("Million dollars :D", 1);
+            }
             giftsMap = giftsMap.OrderBy(x => -x.Value).ToDictionary(x => x.Key, x => x.Value);
             double maxVal = giftsMap.Select(x => x.Value).Max();
             var result = new Dictionary<String, double>();

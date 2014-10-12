@@ -2,10 +2,9 @@
     $('#submit').click(function (e) {
         e.preventDefault();
         var $form = $(this).closest('form');
-        $.post($form.attr('aciton'), $form.serialize(),
+        $.post($form.attr('action'), $form.serialize(),
             function (data) {
                 data = data.result;
-                console.log(data);
                 $("#results").empty();
                 for (var i = 0; i < data.length; i++) {
                     var $cloned = $(".progressTemplate").clone();

@@ -66,6 +66,19 @@ namespace Gifter.Web.Controllers
 
             return Json(new { tid, pid });
         }
+
+        [HttpGet]
+        public ActionResult Facebook()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult HelpViaFacebook()
+        {
+            ViewBag.Gifts = ProcessStringData.getGifts();
+            return View();
+        }
     }
 
     class GiftItem
