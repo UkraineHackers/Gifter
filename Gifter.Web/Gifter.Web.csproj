@@ -310,6 +310,7 @@
     <Content Include="Views\Home\GetRegisteredUsers.cshtml" />
     <Content Include="Views\Home\Facebook.cshtml" />
     <Content Include="Views\Home\HelpViaFacebook.cshtml" />
+    <Content Include="Views\Home\YourViaFacebook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

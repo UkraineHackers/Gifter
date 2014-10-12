@@ -79,6 +79,13 @@ namespace Gifter.Web.Controllers
             ViewBag.Gifts = ProcessStringData.getGifts();
             return View();
         }
+
+        [HttpGet]
+        public ActionResult YourViaFacebook()
+        {
+            ViewBag.Gifts = ProcessStringData.getGifts();
+            return View();
+        }
     }
 
     class GiftItem
